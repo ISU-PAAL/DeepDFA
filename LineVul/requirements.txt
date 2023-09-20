@@ -1,0 +1,22 @@
+aiohttp==3.8.1
+deepspeed==0.7.3
+dgl-cu113==0.9.0
+dglgo==0.0.2
+-f https://data.dgl.ai/wheels/repo.html
+fastparquet==0.8.3
+gdown==4.5.1
+ipykernel==6.15.1
+jsonlines==3.1.0
+nni==2.9
+pip-chill==1.0.1
+pysocks==1.7.1
+pytorch-lightning==1.7.6
+sklearn==0.0
+tensorflow==2.10.0
+torch-geometric==2.1.0.post1
+torch==1.12.0+cu113
+torchaudio==0.12.0+cu113
+torchsampler==0.1.2
+--extra-index-url https://download.pytorch.org/whl/cu113
+transformers==4.21.0
+unidiff==0.7.4

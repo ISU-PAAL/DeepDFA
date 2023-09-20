@@ -1,0 +1,60 @@
+# data files
+*.img
+*.simg
+*.sif
+*.png
+*.csv
+*.zip
+*.tar
+*.tar.gz
+*.bin
+*.gzip
+*.egg-info
+*.txt
+
+# Python
+*.pyc
+.pytest_cache
+__pycache__
+
+# program outputs
+storage/*
+!storage/external/
+storage/external/*
+!storage/external/bigvul_rand_splits.csv
+!storage/external/*.sc
+workspace
+workers
+output
+logs*
+joern
+joern-install.sh
+hpc/logs/*
+hpc/*_logs/*
+
+# project files
+.vscode
+
+# working files
+x42
+tmp
+repos/*
+!repos/*.*
+archives_to_extract*_*
+core.*
+trash
+absdf/*_logs
+*.pstat
+hpc/*_logs_*
+*_logs_*
+*.log
+*.log.error
+lightning_logs/
+checkpoints/periodical-00-01.ckpt
+.env/
+*.json
+.idea/
+*.dat
+venv/
+GloVe/
+*.jsonl

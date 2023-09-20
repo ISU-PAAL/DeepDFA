@@ -1,0 +1,8 @@
+data:
+  feat: _ABS_DATAFLOW_datatype_all_limitall_1000_limitsubkeys_1000
+  gtype: cfg
+  dsname: bigvul
+  undersample: v1.0
+  split: fixed
+  train_workers: 1
+  batch_size: 256

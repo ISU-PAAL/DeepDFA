@@ -1,0 +1,5 @@
+model:
+  n_steps: 5
+  hidden_dim: 32
+  num_output_layers: 3
+  concat_all_absdf: True

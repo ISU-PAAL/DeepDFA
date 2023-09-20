@@ -1,0 +1,48 @@
+seed_everything: 0
+trainer:
+  gpus: 1
+  logger:
+    - class_path: code_gnn.my_tb.MyTensorBoardLogger
+      init_args:
+        save_dir: "."
+        name: lightning_logs
+        version: null
+        sub_dir: null
+        prefix: ""
+        log_graph: false
+        default_hp_metric: false
+  checkpoint_callback: null
+  enable_checkpointing: true
+  callbacks:
+    - class_path: pytorch_lightning.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: step
+    - class_path: code_gnn.periodic_checkpoint.PeriodicModelCheckpoint
+      init_args:
+        every: 25
+    - class_path: pytorch_lightning.callbacks.ModelCheckpoint
+      init_args:
+        filename: "performance-{epoch:02d}-{step:02d}-{val_loss:02f}"
+        monitor: val_loss
+        mode: min
+        save_last: true
+        save_top_k: 1
+    # - class_path: pytorch_lightning.callbacks.RichProgressBar
+    - class_path: pytorch_lightning.callbacks.ModelSummary
+  enable_progress_bar: true
+  overfit_batches: 0.0
+  track_grad_norm: -1
+  check_val_every_n_epoch: 1
+  max_epochs: 25
+  weights_summary: top
+  weights_save_path: null
+  resume_from_checkpoint: null
+  detect_anomaly: true
+  accumulate_grad_batches: null
+  reload_dataloaders_every_n_epochs: 1
+optimizer:
+  class_path: torch.optim.Adam
+  init_args:
+    lr: 1e-3
+    weight_decay: 1e-2
+ckpt_path: null
