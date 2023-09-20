@@ -7,6 +7,7 @@ Updates to the code will be hosted on the GitHub repo.
 Links:
 * Paper: https://doi.org/10.1145/3597503.3623345
 * Arxiv preprint: https://arxiv.org/abs/2212.08108
+* Data package: https://doi.org/10.6084/m9.figshare.21225413
 * GitHub repo: https://github.com/bstee615/DeepDFA
 
 If you used our code in your research, please consider citing our paper:
