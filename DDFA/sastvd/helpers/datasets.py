@@ -365,10 +365,12 @@ def ds_filter(
     # Small sample (for debugging):
     if sample > 0:
         df = df.sample(sample, random_state=seed)
+    assert len(df) > 0
 
     # Filter only vulnerable
     if vulonly:
         df = df[df.vul == 1]
+    assert len(df) > 0
 
     # Filter out samples with no parsed file
     if check_file:
@@ -379,6 +381,7 @@ def ds_filter(
         ]
         df = df[df.id.isin(finished)]
         logger.debug("check_file %d", len(df))
+    assert len(df) > 0
 
     # Filter out samples with no lineNumber from Joern output
     if check_valid:
@@ -394,6 +397,7 @@ def ds_filter(
             valid_cache_df.to_csv(valid_cache)
         df = df[df.id.isin(valid_cache_df[valid_cache_df["valid"]].id)]
         logger.debug("check_valid %d", len(df))
+    assert len(df) > 0
 
     # NOTE: drop several columns to save memory
     if not load_code:
