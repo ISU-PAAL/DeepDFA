@@ -9,7 +9,4 @@
 
 source activate.sh
 
-set -e
-
-python -u sastvd/scripts/dbize.py $@
-python -u sastvd/scripts/dbize_graphs.py $@
+python -u sastvd/scripts/dbize_absdf.py $@

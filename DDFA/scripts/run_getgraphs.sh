@@ -10,5 +10,12 @@
 
 source activate.sh
 
+if [ ! -z "$SLURM_ARRAY_TASK_ID"]
+then
+    jan="--job_array_number $SLURM_ARRAY_TASK_ID"
+else
+    jan=""
+fi
+
 # Start singularity instance
-python -u sastvd/scripts/getgraphs.py bigvul --sess --job_array_number $SLURM_ARRAY_TASK_ID --num_jobs 100 --overwrite
+python -u sastvd/scripts/getgraphs.py bigvul --sess $jan --num_jobs 100 --overwrite $@

@@ -9,5 +9,7 @@
 
 source activate.sh
 
-python -u sastvd/scripts/abstract_dataflow_full.py --workers 16 --no-cache --stage 1
-python -u sastvd/scripts/abstract_dataflow_full.py --workers 16 --no-cache --stage 2
+set -e
+
+python -u sastvd/scripts/abstract_dataflow_full.py --workers 16 --no-cache --stage 1 $@
+python -u sastvd/scripts/abstract_dataflow_full.py --workers 16 --no-cache --stage 2 $@
