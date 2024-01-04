@@ -236,10 +236,10 @@ def helper(row):
     return [row["id"], {"removed": row["removed"], "depadd": dep_add_lines}]
 
 
-def get_dep_add_lines_bigvul(dataset, cache, sample):
+def get_dep_add_lines_bigvul(dataset, cache=True, sample=False):
     """Cache dependent added lines for a dataset."""
     saved = (
-        svd.get_dir(svd.processed_dir() / f"dataset/eval")
+        svd.get_dir(svd.processed_dir()/dataset/"eval")
         / f"statement_labels{'_sample' if sample else ''}.pkl"
     )
     if os.path.exists(saved) and cache:
@@ -255,8 +255,8 @@ def get_dep_add_lines_bigvul(dataset, cache, sample):
     return lines_dict
 
 
-def get_dep_add_lines_bigvul(cache=True, sample=False):
-    return get_dep_add_lines("bigvul", cache, sample)
+# def get_dep_add_lines_bigvul(cache=True, sample=False):
+#     return get_dep_add_lines("bigvul", cache, sample)
 
 
 def eval_statements(sm_logits, labels, thresh=0.5):
