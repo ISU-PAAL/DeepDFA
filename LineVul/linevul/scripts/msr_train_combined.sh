@@ -6,6 +6,8 @@ fi
 
 seed=$1
 dataset=$2
+shift
+shift
 
 python linevul_main.py \
   --model_name=${seed}_linevul.bin \
@@ -25,4 +27,4 @@ python linevul_main.py \
   --learning_rate 2e-5 \
   --max_grad_norm 1.0 \
   --evaluate_during_training \
-  --seed $seed 2>&1 | tee "train_${dataset}_${seed}.log"
+  --seed $seed $@ 2>&1 | tee "train_${dataset}_${seed}.log"
