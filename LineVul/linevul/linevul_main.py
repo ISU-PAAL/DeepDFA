@@ -553,7 +553,7 @@ def main():
             undersample=None,
             oversample=None,
             sample=-1,
-            sample_mode=False,
+            sample_mode=args.sample,
             train_workers=1,
             val_workers=0,
             test_workers=0,
