@@ -252,7 +252,7 @@ def cleanup_datatype(df):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Abstract dataflow")
-    parser.add_argument("--dsname")
+    parser.add_argument("--dsname", default="bigvul")
     parser.add_argument("--sample", action="store_true", help="Extract sample only")
     parser.add_argument("--verbose", action="store_true", help="Verbose output")
     parser.add_argument("--cache", action="store_true")

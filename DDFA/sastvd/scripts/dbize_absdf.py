@@ -3,8 +3,15 @@ import pandas as pd
 import sastvd.helpers.datasets as svdds
 import sastvd as svd
 
-sample_mode = hasattr(__builtins__,'__IPYTHON__')
-dsname = "bigvul"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--sample", action="store_true")
+parser.add_argument("--dsname", default="bigvul")
+args = parser.parse_args()
+
+sample_mode = args.sample
+dsname = args.dsname
+
 sample_text = "_sample" if sample_mode else ""
 cols = ["Unnamed: 0", "graph_id", "node_id"]
 node_dfs = pd.read_csv(svd.processed_dir() / dsname / f"nodes{sample_text}.csv", index_col=0, usecols=cols)

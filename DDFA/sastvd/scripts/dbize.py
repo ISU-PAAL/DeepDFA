@@ -1,11 +1,18 @@
 #%%
 import sastvd.helpers.datasets as svdds
 import sastvd as svd
-import DDFA.sastvd.helpers.evaluate as ivde
+import sastvd.helpers.evaluate as ivde
 from sastvd.linevd.utils import feature_extraction
 
-sample_mode = hasattr(__builtins__,'__IPYTHON__')
-dsname = "bigvul"
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--sample", action="store_true")
+parser.add_argument("--dsname", default="bigvul")
+args = parser.parse_args()
+
+sample_mode = args.sample
+dsname = args.dsname
+
 df = svdds.ds(dsname, cache=True, sample=sample_mode)
 df = svdds.ds_filter(
     df,
@@ -22,7 +29,7 @@ print(df)
 #%%
 if dsname == "bigvul":
     graph_type = "cfg"
-    dep_add_lines = ivde.get_dep_add_lines_bigvul()
+    dep_add_lines = ivde.get_dep_add_lines_bigvul("bigvul", sample=sample_mode)
     dep_add_lines = {k: set(list(v["removed"]) + v["depadd"]) for k, v in dep_add_lines.items()}
 
     def get_vuln(lineno, _id, dep_add_lines):
