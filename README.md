@@ -1,125 +1,132 @@
 # Reproduction package for "Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection"
 
-We included the code to reproduce our experiments on DeepDFA, LineVul, LineVul+DeepDFA, UniXcoder, and CodeT5, to be published at ICSE 2024.
-This data package includes the code and data that was checked during peer review and was prepared on September 20, 2023.
-Updates to the code will be hosted on the GitHub repo.
+This repository includes the code to reproduce our experiments on DeepDFA, LineVul, LineVul+DeepDFA, UniXcoder, and CodeT5, accepted at ICSE 2024.
 
 Links:
-* Paper: https://doi.org/10.1145/3597503.3623345
-* Arxiv preprint: https://arxiv.org/abs/2212.08108
+* Paper: https://www.computer.org/csdl/proceedings-article/icse/2024/021700a166/1RLIWqviwEM
+* ArXiv preprint: https://arxiv.org/abs/2212.08108
 * Data package: https://doi.org/10.6084/m9.figshare.21225413
 * GitHub repo: https://github.com/ISU-PAAL/DeepDFA
+
+# Changelog
+
+- Initial data package creation: September 20, 2023
+- Cleanup for artifact evaluation: January 04, 2024
+
+# Organization
+
+```bash
+├── CodeT5: the code for the CodeT5 and CodeT5+DeepDFA models.
+├── DDFA: the code for the DeepDFA model.
+├── LineVul: the code for the LineVul and LineVul+DeepDFA models.
+├── scripts: miscellaneous scripts we used to report the results.
+└── README.md: this file
+```
+
+# Setup
+
+Use these scripts to set up your environment for running the experiments.
+We ran the experiments on an AMD Ryzen 5 1600 3.2 GHz processor with 48GB of RAM and an Nvidia 3090 GPU with 24GB of GPU memory and CUDA 11.3.
+
+## Set up dependencies
+
+```bash
+# Create virtual environment
+conda create --name deepdfa python=3.10 -y
+conda activate deepdfa
+# Install requirements
+conda install cudatoolkit=11.6 -y
+export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
+pip install -r requirements.txt
+# Add project files to import path
+export PYTHONPATH="$PWD/DDFA:$PYTHONPATH"
+# Install joern and add it to the executable path
+bash scripts/install_joern.sh
+export PATH="$PWD/joern/joern-cli:$PATH"
+```
+
+## Unpack data
+
+```bash
+# TODO: remove
+# # Download raw CSV format of the Big-Vul dataset
+# mkdir -p DDFA/storage/external/
+# gdown --fuzzy 'https://drive.google.com/file/d/1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X/view?usp=sharing' -O DDFA/storage/external/MSR_data_cleaned.csv
+# We included an archive containing the preprocessed files in the data package on Figshare.
+# TODO: add link.
+unzip preprocessed_data.zip 'DDFA/storage/*' -d DeepDFA/DDFA/storage/
+unzip preprocessed_data.zip 'LineVul/data/*' -d LineVul/data/
+```
+
+# Run main experiments
+
+## Train DeepDFA
+
+This script trains DeepDFA based on the dataset of source code already processed into CFGs.
+It reports the performance at the end, comparable to Table 3b in our paper.
+
+```bash
+cd DDFA
+# Train DeepDFA
+bash scripts/train.sh --seed_everything 1
+```
+
+## Train LineVul baseline or DeepDFA+LineVul
+
+These scripts report performance of the LineVul and DeepDFA+LineVul models, comparable to Table 3b in our paper.
+
+```bash
+cd LineVul/linevul
+# Train LineVul
+bash scripts/msr_train_linevul.sh 1 MSR
+# Train DeepDFA+LineVul
+bash scripts/msr_train_combined.sh 1 MSR
+```
+
+# Run end-to-end processing
+
+The above scripts use the preprocessed data included in our data archive, for ease of replicability. The instructions below show how to run the code end-to-end.
+
+## Sample data
+
+The current prototype scripts take some time to process data into the format for our dataset, so we provide instructions how to do it with sample mode or full data mode.
+
+```bash
+cd DDFA
+bash scripts/run_prepare.sh --sample
+bash scripts/run_getgraphs.sh --sample
+bash scripts/run_dbize.sh --sample
+bash scripts/run_abstract_dataflow.sh --sample
+bash scripts/run_absdf.sh --sample
+# Train DeepDFA
+bash scripts/train.sh --seed_everything 1 --data.sample_mode True
+
+cd ../LineVul/linevul
+# Train DeepDFA+LineVul
+bash scripts/msr_train_combined.sh 1 MSR --sample --epochs 1
+```
+
+## Full data preprocessing
+
+To run the full preprocessing from the raw MSR dataset to training DeepDFA, unpack only `storage/external/MSR_data_cleaned.csv` (skipping the preprocessed data such as the CFGs in `storage/processed`) and run these steps.
+
+```bash
+cd DDFA
+bash scripts/run_prepare.sh
+bash scripts/run_getgraphs.sh # Make sure Joern is installed!
+bash scripts/run_dbize.sh
+bash scripts/run_abstract_dataflow.sh
+bash scripts/run_absdf.sh
+# Train DeepDFA
+bash scripts/train.sh --seed_everything 1
+```
+
+# Extended README for all experiments
+
+See README.extended.md in the Github repo for the extended instructions on running other experiments.
+
+# Citation
 
 If you used our code in your research, please consider citing our paper:
 
 > Benjamin Steenhoek, Hongyang Gao, and Wei Le. 2024. Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection. In 2024 IEEE/ACM 46th International Conference on Software Engineering (ICSE ’24), April 14–20, 2024, Lisbon, Portugal. ACM, New York, NY, USA, 13 pages. https://doi.org/10.1145/3597503.3623345
-
-Here is how the files are organized.
-
-```
-├── DDFA: the code for the DeepDFA model.
-├── CodeT5: the code for the CodeT5 and CodeT5+DeepDFA models.
-├── LineVul: the code for the LineVul and LineVul+DeepDFA models.
-├── logs: the logs output during our training and evaluation process.
-├── models: the saved checkpoints of the models we trained and evaluated. This excludes UniXcoder and CodeT5 checkpoints for lack of space and may be available upon request.
-├── scripts: miscellaneous scripts we used to report the results.
-└── README.md
-```
-
-We ran the experiments on an AMD Ryzen 5 1600 3.2 GHz processor with 48GB of RAM and an Nvidia 3090 GPU with 24GB of GPU memory and CUDA 11.3.
-To reduce the size of the package, we included 1 seed/fold of the LineVul model checkpoints for each experiment. The other checkpoints will be made available upon request.
-
-## DeepDFA code
-
-Forked from [LineVD](https://github.com/davidhin/linevd).
-We used their code to generate CFGs with [Joern v1.1.1072](https://joern.io/) and load the dataset.
-
-First, run setup:
-
-```bash
-cd DDFA
-# setup environment
-pip install virtualenv
-virtualenv -p 3.10 venv
-source venv/bin/activate
-pip install -r requirements.txt
-export PYTHONPATH="$PWD:$PYTHONPATH"
-
-# unpack CFG dataset
-cd storage/processed/bigvul
-unzip before.zip
-cd -
-
-# preprocess (data are already available)
-# sbatch --wait scripts/run_prepare.sh        # or use bash if not on slurm
-# sbatch --wait scripts/run_getgraphs.sh      # or use bash if not on slurm
-# bash scripts/run_dbize.sh
-# bash scripts/run_abstract_dataflow.sh
-
-bash scripts/train.sh --seed_everything 1                   # train on MSR
-bash scripts/run_profiling.sh <checkpoint_from_training>    # run profiling on trained checkpoint
-bash scripts/run_cross_project.sh                           # train on mixed-project, evaluate on mixed- and cross-project
-```
-
-The coverage of the abstract dataflow embedding (running with `--analyze_dataset`) is logged in `logs/1.Effectiveness/DDFA/analyze_dataset.log`.
-
-## LineVul code
-
-Forked from [LineVul](https://github.com/awsm-research/LineVul).
-We used their code to evaluate LineVul and combine with DDFA.
-
-First, run setup:
-```bash
-cd LineVul
-# setup environment
-pip install virtualenv
-virtualenv -p 3.10 venv
-source venv/bin/activate
-pip install -r requirements.txt
-export PYTHONPATH="$PWD/../DDFA:$PYTHONPATH"
-
-# run DDFA preprocessing before running any *_combined.sh
-
-cd linevul
-# MSR
-bash scripts/msr_train_linevul.sh 1 MSR                 # original LineVul model (without DeepDFA)
-bash scripts/msr_train_combined.sh 1 MSR                # LineVul + DeepDFA
-# cross project
-bash scripts/cross_project_train_linevul.sh  1 cross_project/fold_0_holdout
-bash scripts/cross_project_eval_linevul.sh   1 saved_models/cross_project-fold_0_dataset/checkpoint-best-f1/1_linevul.bin  cross_project/fold_0_holdout
-bash scripts/cross_project_train_combined.sh 1 cross_project/fold_0_holdout
-bash scripts/cross_project_eval_combined.sh  1 saved_models/cross_project-fold_0_dataset/checkpoint-best-f1/1_combined.bin cross_project/fold_0_holdout
-```
-
-`missing_ids.txt` is a list of the 7% of the dataset examples which could not be parsed by DDFA.
-
-## Reporting profiling records
-
-Use `scripts/report_profiling.py`. For example:
-
-```
-python scripts/report_profiling.py --profiledata logs/2.Efficiency/profiling/DDFA/gpu_bs1/profiledata.jsonl
-gflops: 763.31798 average: 0.04079514617070173
-gmacs: 763.31798 average: 0.04079514617070173
-```
-
-For LineVul and LineVul+DDFA, GMACs are printed in `profile.log` (consider the first occurrence of `XXX GMACs`).
-
-## Ablation study
-The scripts for training ablation models and evaluating them on DbgBench are in `ablation_study/scripts`.
-The scripts, notebooks, and model outputs for extracting performance metrics are in `ablation_study/logs_bigvul` and `ablation_study/logs_dbgbench`.
-
-## CodeT5
-The scripts for training CodeT5 and DeepDFA+CodeT5 are in `CodeT5/code/CodeT5/sh`.
-The logs of running the scripts are in `CodeT5/logs/*/train.log`.
-
-## UniXcoder
-The scripts for training UniXcoder and DeepDFA+UniXcoder are in `UniXcoder/scripts`.
-This includes an updated script, `linevul_main.py`, for running the LineVul model with a UniXcoder backbone and can be placed into the `LineVul/linevul` source directory to run with the code in the main data package.
-The logs of running the scripts are in the various directories `logs_*`.
-Notebooks are included to summarize model performance in `logs_size` and `logs_crossproject` and a script is included for DbgBench in `logs_dbgbench`.
-
-## Statistical tests
-The scripts and model outputs for running statistical tests on LLM vs. DeepDFA+LLM are in `statistical_test`.
-Please see `linevul.ipynb` to run LineVul vs. DeepDFA+LineVul, and
-Please see `unixcoder.ipynb` to run UniXcoder vs. DeepDFA+UniXcoder.
