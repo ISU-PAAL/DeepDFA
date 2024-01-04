@@ -1,21 +1,22 @@
 import argparse
 import sastvd as svd
 import sastvd.helpers.datasets as svdd
-import DDFA.sastvd.helpers.evaluate as ivde
+import sastvd.helpers.evaluate as ivde
 
 
 def bigvul():
     """Run preperation scripts for BigVul dataset."""
     print(svdd.bigvul(sample=args.sample))
-    ivde.get_dep_add_lines("bigvul", sample=args.sample)
-    svdglove.generate_glove("bigvul", sample=args.sample)
-    svdd2v.generate_d2v("bigvul", sample=args.sample)
+    ivde.get_dep_add_lines_bigvul("bigvul", sample=args.sample)
+    # svdglove.generate_glove("bigvul", sample=args.sample)
+    # svdd2v.generate_d2v("bigvul", sample=args.sample)
     print("success")
 
 
 def devign():
+    raise NotImplementedError
     print(svdd.devign(sample=args.sample))
-    # ivde.get_dep_add_lines("devign", sample=args.sample)
+    ivde.get_dep_add_lines("devign", sample=args.sample)
     svdglove.generate_glove("devign", sample=args.sample)
     svdd2v.generate_d2v("devign", sample=args.sample)
     print("success")
