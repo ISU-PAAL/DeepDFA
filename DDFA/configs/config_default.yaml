@@ -11,7 +11,7 @@ trainer:
         prefix: ""
         log_graph: false
         default_hp_metric: false
-  checkpoint_callback: null
+  # checkpoint_callback: null
   enable_checkpointing: true
   callbacks:
     - class_path: pytorch_lightning.callbacks.LearningRateMonitor
@@ -34,7 +34,7 @@ trainer:
   track_grad_norm: -1
   check_val_every_n_epoch: 1
   max_epochs: 25
-  weights_summary: top
+  # weights_summary: top
   weights_save_path: null
   resume_from_checkpoint: null
   detect_anomaly: true
