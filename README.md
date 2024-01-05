@@ -4,6 +4,7 @@ This repository includes the code to reproduce our experiments on DeepDFA, LineV
 
 Links:
 * Paper: https://www.computer.org/csdl/proceedings-article/icse/2024/021700a166/1RLIWqviwEM
+  * [Also see PDF here](./paper.pdf)
 * ArXiv preprint: https://arxiv.org/abs/2212.08108
 * Data package: https://doi.org/10.6084/m9.figshare.21225413
 * GitHub repo: https://github.com/ISU-PAAL/DeepDFA
