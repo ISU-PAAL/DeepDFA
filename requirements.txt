@@ -24,3 +24,4 @@ networkx
 pexpect
 jsonargparse[signatures]
 fastparquet
+gdown
