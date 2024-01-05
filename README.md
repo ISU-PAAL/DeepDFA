@@ -47,9 +47,6 @@ export LD_LIBRARY_PATH="$CONDA_PREFIX/lib:$LD_LIBRARY_PATH"
 pip install -r requirements.txt
 # Add project files to import path
 export PYTHONPATH="$PWD/DDFA:$PYTHONPATH"
-# Install joern and add it to the executable path
-bash scripts/install_joern.sh
-export PATH="$PWD/joern/joern-cli:$PATH"
 ```
 
 ## Unpack data
@@ -57,6 +54,16 @@ export PATH="$PWD/joern/joern-cli:$PATH"
 ```bash
 # In repository root directory
 bash scripts/download_all.sh
+```
+
+## (Optional) Install Joern
+
+This is only necessary if you want to run the preprocessing end-to-end, rather than use the preprocessed files we provide.
+
+```bash
+# Install joern and add it to the executable path
+bash scripts/install_joern.sh
+export PATH="$PWD/joern/joern-cli:$PATH"
 ```
 
 # Run main experiments
