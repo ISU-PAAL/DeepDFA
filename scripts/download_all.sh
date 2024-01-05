@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Raw Big-Vul dataset
-# gdown --fuzzy 'https://drive.google.com/file/d/1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X/view?usp=sharing' -O DDFA/storage/external/MSR_data_cleaned.csv
-gdown 'https://drive.google.com/uc?id=1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X' -O DDFA/storage/external/MSR_data_cleaned.csv
+gdown 'https://drive.google.com/uc?id=1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X' -O DDFA/storage/external/MSR_data_cleaned.zip
+unzip DDFA/storage/external/MSR_data_cleaned.zip -d DDFA/storage/external/
 
 # LineVul version of Big-Vul dataset
 gdown 'https://drive.google.com/uc?id=1h0iFJbc5DGXCXXvvR6dru_Dms_b2zW4V' -O LineVul/data/MSR/test.csv
