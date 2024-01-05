@@ -38,8 +38,6 @@ cd DeepDFA
 ## Set up dependencies
 
 ```bash
-# In repository root directory
-
 # Create virtual environment
 conda create --name deepdfa python=3.10 -y
 conda activate deepdfa
@@ -73,6 +71,11 @@ cd DDFA
 # Train DeepDFA
 bash scripts/train.sh --seed_everything 1
 ```
+
+Troubleshooting:
+- If you experience error `OSError: libcusparse.so.11: cannot open shared object file: No such file or directory`, please check that libcusparse.so.11 is present on `LD_LIBRARY_PATH` (see setup instructions).
+- If you experience error `ModuleNotFoundError: No module named 'code_gnn'`, please check that the path to `DeepDFA/DDFA` is present on the `PYTHONPATH` (see setup instructions).
+- If you experience errors such as `CUDA error: no kernel image is available for execution on the device` or `NVIDIA XX with CUDA capability sm_YY is not compatible with the current PyTorch installation.`, please try a different version of CUDA toolkit (see setup instructions).
 
 ## Train LineVul baseline or DeepDFA+LineVul
 
