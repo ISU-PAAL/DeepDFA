@@ -28,6 +28,13 @@ Links:
 Use these scripts to set up your environment for running the experiments.
 We ran the experiments on an AMD Ryzen 5 1600 3.2 GHz processor with 48GB of RAM and an Nvidia 3090 GPU with 24GB of GPU memory and CUDA 11.3.
 
+## Get the code
+
+```bash
+git clone https://github.com/ISU-PAAL/DeepDFA
+cd DeepDFA
+```
+
 ## Set up dependencies
 
 ```bash
