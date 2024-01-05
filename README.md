@@ -31,6 +31,8 @@ We ran the experiments on an AMD Ryzen 5 1600 3.2 GHz processor with 48GB of RAM
 ## Set up dependencies
 
 ```bash
+# In repository root directory
+
 # Create virtual environment
 conda create --name deepdfa python=3.10 -y
 conda activate deepdfa
@@ -48,14 +50,8 @@ export PATH="$PWD/joern/joern-cli:$PATH"
 ## Unpack data
 
 ```bash
-# TODO: remove
-# # Download raw CSV format of the Big-Vul dataset
-# mkdir -p DDFA/storage/external/
-# gdown --fuzzy 'https://drive.google.com/file/d/1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X/view?usp=sharing' -O DDFA/storage/external/MSR_data_cleaned.csv
-# We included an archive containing the preprocessed files in the data package on Figshare.
-# TODO: add link.
-unzip preprocessed_data.zip 'DDFA/storage/*' -d DeepDFA/DDFA/storage/
-unzip preprocessed_data.zip 'LineVul/data/*' -d LineVul/data/
+# In repository root directory
+bash scripts/download_all.sh
 ```
 
 # Run main experiments
