@@ -64,9 +64,27 @@ This section describes the organization and contents of various datasets and pre
   - Anaconda3 (we tested on version 23.10.0).
   - CUDA and CUDA toolkit (we tested on version 11.8).
 
+We also provide a Docker container which fulfills the software requirements. To use it, please ensure you have installed the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+
 # Usage
 
 Use these scripts to run the main performance experiments from the paper (Table 3b).
+
+## Docker
+
+These instructions start up a Docker container with the requisite requirements.
+
+```bash
+# Start the Docker container with an interactive shell
+bash docker_run.sh
+
+# Now inside the Docker container shell
+
+# Download the data
+bash scripts/download_all.sh
+# Run the main experiments
+bash scripts/performance_evaluation.sh
+```
 
 ## Simple usage
 
