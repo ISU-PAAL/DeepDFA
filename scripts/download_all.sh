@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Raw Big-Vul dataset
 gdown 'https://drive.google.com/uc?id=1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X' -O DDFA/storage/external/MSR_data_cleaned.zip
