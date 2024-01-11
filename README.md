@@ -14,6 +14,11 @@ Links:
 
 - Initial data package creation: September 20, 2023
 - Cleanup for artifact evaluation: January 04, 2024
+  - Add full usage instructions and scripts
+  - Fix bugs
+- Integrate feedback from artifact evaluation: January 10, 2024
+  - Add documentation and convenience scripts
+  - Add Docker container
 
 # Data
 
@@ -61,7 +66,7 @@ This section describes the organization and contents of various datasets and pre
 - Hardware: We ran the experiments on an AMD Ryzen 5 1600 3.2 GHz processor with 48GB of RAM and an Nvidia 3090 GPU with 24GB of GPU memory.
 - Software:
   - Linux operating system (we tested on Ubuntu version 22.04).
-  - Anaconda3 (we tested on version 23.10.0).
+  - Anaconda3 (we tested on version 23.11.0).
   - CUDA and CUDA toolkit (we tested on version 11.8).
 
 We also provide a Docker container which fulfills the software requirements. To use it, please ensure you have installed the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
@@ -76,14 +81,14 @@ These instructions start up a Docker container with the requisite requirements.
 
 ```bash
 # Start the Docker container with an interactive shell
-bash docker_run.sh
+bash docker_run.sh # may take up to 10 minutes to download the Docker container
 
 # Now inside the Docker container shell
 
 # Download the data
-bash scripts/download_all.sh
+bash scripts/download_all.sh # takes about 30 minutes
 # Run the main experiments
-bash scripts/performance_evaluation.sh
+bash scripts/performance_evaluation.sh # Takes about 20 hours to run all experiments; see below for individual experiments
 ```
 
 ## Simple usage
@@ -94,11 +99,11 @@ We provided wrapper scripts to execute the various steps.
 # Download the code
 git clone https://github.com/ISU-PAAL/DeepDFA
 # Setup the environment
-. scripts/setup_environment.sh
+. scripts/setup_environment.sh # may take up to 20 minutes to download the packages
 # Download the data
 bash scripts/download_all.sh
 # Run the main experiments
-bash scripts/performance_evaluation.sh
+bash scripts/performance_evaluation.sh # Takes about 20 hours to run all experiments; see below for individual experiments
 ```
 
 ## Get the code
@@ -113,7 +118,7 @@ cd DeepDFA
 ```bash
 # In repository root directory
 . scripts/setup_environment.sh
-# Optional: install joern and add it to the executable path
+# Optional: install joern and add it to the executable path. Takes about 10 minutes
 bash $(dirname $0)/install_joern.sh
 export PATH="$PWD/joern/joern-cli:$PATH"
 ```
@@ -133,7 +138,7 @@ It reports the performance at the end, comparable to Table 3b in our paper.
 ```bash
 cd DDFA
 # Train DeepDFA
-bash scripts/train.sh --seed_everything 1
+bash scripts/train.sh --seed_everything 1 # takes about 30 minutes
 ```
 
 ## Train LineVul baseline or DeepDFA+LineVul
@@ -143,9 +148,9 @@ These scripts report performance of the LineVul and DeepDFA+LineVul models, comp
 ```bash
 cd LineVul/linevul
 # Train LineVul
-bash scripts/msr_train_linevul.sh 1 MSR
+bash scripts/msr_train_linevul.sh 1 MSR # takes about 10 hours
 # Train DeepDFA+LineVul
-bash scripts/msr_train_combined.sh 1 MSR
+bash scripts/msr_train_combined.sh 1 MSR # takes about 10 hours
 ```
 
 ## Run end-to-end processing
