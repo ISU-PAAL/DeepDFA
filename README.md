@@ -80,6 +80,10 @@ Use these scripts to run the main performance experiments from the paper (Table 
 These instructions start up a Docker container with the requisite requirements.
 
 ```bash
+# Download the code
+git clone https://github.com/ISU-PAAL/DeepDFA
+cd DeepDFA
+
 # Start the Docker container with an interactive shell
 bash docker_run.sh # may take up to 10 minutes to download the Docker container
 
@@ -98,6 +102,8 @@ We provided wrapper scripts to execute the various steps.
 ```bash
 # Download the code
 git clone https://github.com/ISU-PAAL/DeepDFA
+cd DeepDFA
+
 # Setup the environment
 . scripts/setup_environment.sh # may take up to 20 minutes to download the packages
 # Download the data
