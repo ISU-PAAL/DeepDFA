@@ -163,7 +163,7 @@ The current prototype scripts take some time to process data into the format for
 
 ```bash
 cd DDFA
-bash scripts/preprocess_data.sh --sample
+bash scripts/preprocess.sh --sample # may take several hours. Requires Joern to be installed
 # Train DeepDFA
 bash scripts/train.sh --seed_everything 1 --data.sample_mode True
 
@@ -178,7 +178,7 @@ To run the full preprocessing from the raw MSR dataset to training DeepDFA, unpa
 
 ```bash
 cd DDFA
-bash scripts/preprocess_data.sh
+bash scripts/preprocess.sh # may take several hours. Requires Joern to be installed
 # Train DeepDFA
 bash scripts/train.sh --seed_everything 1
 ```
