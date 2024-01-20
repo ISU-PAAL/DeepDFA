@@ -126,6 +126,8 @@ bash scripts/docker_run_cpu.sh # may take up to 10 minutes to download the Docke
 bash scripts/download_all.sh # takes about 30 minutes
 # Run the main experiments
 bash scripts/performance_evaluation.sh # Takes about 20 hours to run all experiments; see below for individual experiments
+# Optional: run without CUDA; this removes the requirement for NVIDIA Container Toolkit.
+bash scripts/performance_evaluation_cpu.sh
 ```
 
 ## Simple usage
