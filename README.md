@@ -73,7 +73,7 @@ The total storage requirements are about 8GB download bandwidth and 45 GB unzipp
   - Anaconda3 (we tested on version 23.11.0).
   - CUDA and CUDA toolkit (we tested on version 11.8).
 
-We also provide a Docker container which fulfills the software requirements. To use it, please ensure you have installed the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html).
+We also provide a Docker container which fulfills the software requirements. To use the container with CUDA, please ensure you have installed the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html). We provided a script to run without CUDA, and without installing NVIDIA Container Toolkit, if desired.
 
 # Usage
 
@@ -88,8 +88,10 @@ These instructions start up a Docker container with the requisite requirements.
 git clone https://github.com/ISU-PAAL/DeepDFA
 cd DeepDFA
 
-# Start the Docker container with an interactive shell
-bash docker_run.sh # may take up to 10 minutes to download the Docker container
+# Start the Docker container with an interactive shell; requires NVIDIA Container Toolkit to be installed.
+bash scripts/docker_run.sh # may take up to 10 minutes to download the Docker container
+# Optional: run without CUDA; this removes the requirement for NVIDIA Container Toolkit.
+bash scripts/docker_run_cpu.sh # may take up to 10 minutes to download the Docker container
 
 # Now inside the Docker container shell
 
