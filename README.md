@@ -4,7 +4,7 @@ This artifact includes the code to reproduce our experiments on DeepDFA, LineVul
 This constitutes a large part of the research prototype, with other experiments consisting of running other models and running on other datasets.
 
 Links:
-- Paper: "Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection" https://www.computer.org/csdl/proceedings-article/icse/2024/021700a166/1RLIWqviwEM
+- Paper: "Dataflow Analysis-Inspired Deep Learning for Efficient Vulnerability Detection" [https://dl.acm.org/doi/10.1145/3597503.3623345](https://dl.acm.org/doi/10.1145/3597503.3623345)
   - [Also see PDF here](./paper.pdf)
 - ArXiv preprint: https://arxiv.org/abs/2212.08108
 * Data package: https://doi.org/10.6084/m9.figshare.21225413
