@@ -4,7 +4,7 @@ channels:
 dependencies:
   - python=3.10
   - cudatoolkit=11.8
-  - pip
+  - pip==23.2.1
   - pip:
     - -f https://data.dgl.ai/wheels/cu117/repo.html
     - dgl<1.1.3
